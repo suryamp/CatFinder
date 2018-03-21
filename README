@@ -1,11 +1,10 @@
 CATFINDER (R)
 
-A premiere application coded to find cats in your videoframe!
+A premiere application coded to find cats in your videoframes!
 
 This RESTful service accepts black and white video stills encoded as text via a JSON format.
 
-This service uses an 85% match to determine if the video still contains a cat or not. This is to ensure that the service works
-against noisy video stills. This value can be configured in the CatFinder class.
+This service uses an 85% match to determine if the video still contains a cat or not. This is to ensure that the service works against noisy video stills. This value can be configured in the CatFinder class.
 
 The match rate can be customized by using a different API endpoint: /findcatswiththresholdmatch
 
