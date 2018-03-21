@@ -1,0 +1,103 @@
+CATFINDER (R)
+
+A premiere application coded to find cats in your videoframe!
+
+This RESTful service accepts black and white video stills encoded as text via a JSON format.
+
+This service uses an 85% match to determine if the video still contains a cat or not. This is to ensure that the service works
+against noisy video stills. This value can be configured in the CatFinder class.
+
+The match rate can be customized by using a different API endpoint: /findcatswiththresholdmatch
+
+DEPLOYMENT
+
+Run "./mvnw spring-boot:run" in the project directory containing this README file.
+
+Application will be listening to HTTP requests on port 8080 by default.
+
+API endpoints:
+
+DEFINITION
+
+POST http://localhost:8080/findcats
+with body payload in raw:
+
+    {
+    	"imageWithCats" : [<STRING ARRAY HERE>]
+    }
+
+POST http://localhost:8080/findcatswiththresholdmatch
+    with body payload in raw:
+
+    {
+    	"imageWithCats" : [<STRING ARRAY HERE>],
+        "matchThreshold": <MATCH THRESHOLD HERE>
+    }
+
+ARGUMENTS
+
+String[] imageWithCats
+Can be of any size unless object is null, in which case a NPE will be thrown and handled and 0 will be returned.
+
+-NOT NEEDED FOR /findcats-
+int matchThreshold
+Can be any integer from 1-100.
+
+EXAMPLE REQUEST
+
+POST http://localhost:8080/findcats
+with body payload in raw:
+
+    {
+    	"imageWithCats" : [
+            "+             +",
+            "+++         +++",
+            " +++++++++++++ ",
+            " ++         ++ ",
+            "++  +     +  ++",
+            "++ +++   +++ ++",
+            "++           ++",
+            " ++   +++   ++ ",
+            " ++         ++ ",
+            "  ++ +   + ++  ",
+            "  ++  +++  ++  ",
+            "   ++     ++   ",
+            "     +++++     ",
+            "               ",
+            "               ",
+            "               ",
+            "               "
+        ]
+    }
+
+POST http://localhost:8080/findcatswiththresholdmatch
+    with body payload in raw:
+
+    {
+    	"imageWithCats" : [
+            "+             +",
+            "+++         +++",
+            " +++++++++++++ ",
+            " ++         ++ ",
+            "++  +     +  ++",
+            "++ +++   +++ ++",
+            "++           ++",
+            " ++   +++   ++ ",
+            " ++         ++ ",
+            "  ++ +   + ++  ",
+            "  ++  +++  ++  ",
+            "   ++     ++   ",
+            "     +++++     ",
+            "               ",
+            "               ",
+            "               ",
+            "               "
+        ],
+        "matchThreshold":100
+    }
+
+EXAMPLE RESPONSE
+
+{
+    "numberOfCats": 0
+}
